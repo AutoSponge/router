@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "coverify": "^1.0.6",
+    "gulp": "^3.6.0",
+    "gulp-complexity": "^0.1.3",
+    "gulp-jshint": "^1.5.3",
+    "jshint-stylish": "^0.1.5",
+    "tape": "^2.12.0"
+  },
+  "scripts": {
+    "test": "browserify test/test.js > test/bundle.js && tape test/*.js",
+    "coverage": "browserify -t coverify test/test.js | testling | coverify"
+  }
+}
