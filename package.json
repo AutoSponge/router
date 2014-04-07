@@ -5,7 +5,8 @@
     "gulp-complexity": "^0.1.3",
     "gulp-jshint": "^1.5.3",
     "jshint-stylish": "^0.1.5",
-    "tape": "^2.12.0"
+    "tape": "^2.12.0",
+    "browserify": "^3.38.1"
   },
   "scripts": {
     "test": "browserify test/test.js > test/bundle.js && tape test/*.js",
