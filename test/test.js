@@ -1,8 +1,18 @@
 var test = require( 'tape' );
-var router = require( '../src/' );
+var Router = require( '../src/' );
+
+test( 'Router.create, new Router, Router.instance', function ( t ) {
+    t.plan( 3 );
+    t.ok( Router.create() instanceof Router, 'router.create returns an instance of router' );
+    t.notEqual( Router.create(), new Router(), 'instances should be unique' );
+    //we can't test if Router.instance is an instanceof Router
+    //because it was constructed before this execution context evaluated Router
+    t.equal( Router.instance.constructor, Router, 'Router.instance should be constructed by Router' );
+} );
 
 test( 'a/b/c', function ( t ) {
     t.plan( 3 );
+    var router = new Router();
     var abc = {};
     router.addRoute( 'a/b/c', abc );
     t.equal( router.match( 'a/b/c' ).fn, abc, 'a/b/c should match a/b/c' );
@@ -12,7 +22,7 @@ test( 'a/b/c', function ( t ) {
 
 test( 'a/b/:id', function ( t ) {
     t.plan( 8 );
-    router.reset();
+    var router = new Router();
     var abc = {id: 'abc'};
     var abi = {id: 'abi'};
     var result;
@@ -31,9 +41,26 @@ test( 'a/b/:id', function ( t ) {
     t.equal( result.params.id, 'd', 'd should be the id');
 } );
 
+test( 'a/b/:id as addHandler', function ( t ) {
+    t.plan( 6 );
+    var router = new Router();
+    var result;
+    var abi = {id: 'abi' };
+    ['a/b/c', 'a/b/:id'].forEach( router.addHandler( abi ) );
+    result = router.match( 'a/b/c' );
+    t.equal( result.fn, abi, 'a/b/c should match a/b/c' );
+    t.notOk( result.params.id, 'a/b/c should not have params' );
+
+    result = router.match( 'a/b/d' );
+    t.equal( result.fn, abi, 'a/b/c should match a/b/c' );
+    t.equal( result.params.id, 'd', 'a/b/d should have id: d' );
+    t.notOk( router.match( 'a/b/c/d' ), 'should not match a/b/c/d' );
+    t.notOk( router.match( 'a/b' ), 'should not match a/b' );
+} );
+
 test( 'a/b/*', function ( t ) {
     t.plan( 5 );
-    router.reset();
+    var router = new Router();
     var abc = {id: 'abc'};
     var abx = {id: 'ab*'};
     var result;
@@ -53,7 +80,7 @@ test( 'a/b/*', function ( t ) {
 
 test( 'a/b/c -> *', function ( t ) {
     t.plan( 1 );
-    router.reset();
+    var router = new Router();
     var splat = {id: '*'};
     router.addRoute( '*', splat );
     t.equal( router.match( 'a/b/c' ).fn, splat, 'a/b/c should match default route' );
