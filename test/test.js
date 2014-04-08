@@ -1,5 +1,6 @@
 var test = require( 'tape' );
 var Router = require( '../src/' );
+var shim = require( './shim/object-create' );
 
 test( 'Router.create, new Router, Router.instance', function ( t ) {
     t.plan( 3 );
