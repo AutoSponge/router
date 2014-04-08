@@ -3,11 +3,9 @@ var Router = require( '../src/' );
 
 test( 'Router.create, new Router, Router.instance', function ( t ) {
     t.plan( 3 );
-    t.ok( Router.create() instanceof Router, 'router.create returns an instance of router' );
+    t.ok( Router.create() instanceof Router, 'router.create returns an instanceof Router' );
     t.notEqual( Router.create(), new Router(), 'instances should be unique' );
-    //we can't test if Router.instance is an instanceof Router
-    //because it was constructed before this execution context evaluated Router
-    t.equal( Router.instance.constructor, Router, 'Router.instance should be constructed by Router' );
+    t.ok( Router.instance instanceof Router, 'Router.instance should be an instanceof Router' );
 } );
 
 test( 'a/b/c', function ( t ) {

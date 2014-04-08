@@ -40,11 +40,26 @@ module.exports = RouteParam;
 },{}],3:[function(_dereq_,module,exports){
 'use strict';
 
-function RouterEvent( path ) {
+function RouterEvent( path, data ) {
     this.path = path;
-    this.current = path.split( '/' );
-    this.segments = path.split( '/' );
+    this.currentPath = path;
+    this.current = this.splitPath();
+    this.segments = this.splitPath();
+    this.data = this.getData( data );
 }
+
+RouterEvent.prototype = {
+    splitPath: function () {
+        return this.path.split( '/' );
+    },
+    getData: function ( args ) {
+        return Array.call.apply( Array, args );
+    },
+    updatePath: function () {
+        this.currentPath = this.current.join( '/' );
+        return this.currentPath;
+    }
+};
 
 module.exports = RouterEvent;
 },{}],4:[function(_dereq_,module,exports){
@@ -126,15 +141,14 @@ function processSpecificity( event, slice ) {
 function Router() {
     var routes = {};
 
-    this.addRoute = function ( path, fn ) {
+    this.addRoute = function ( path, fn, force ) {
         var route = new Route( path, fn );
-        routes[route.eventPath] = route;
+        routes[route.eventPath] = force ? route : routes[route.eventPath] || route;
     };
 
     this.handleEvent = function ( event ) {
         var route;
-        event.path = event.current.join( '/' );
-        route = routes[event.path];
+        route = routes[event.updatePath()];
         return route && new RouterResponse( event, route );
     };
 }
@@ -143,12 +157,10 @@ Router.create = function () {
     return new Router();
 };
 
-Router.instance = new Router();
-
 Router.prototype = {
 
     match: function ( path ) {
-        var event = path.split ? new RouterEvent( path ) : path;
+        var event = path.split ? new RouterEvent( path, arguments ) : path;
         return this.handleEvent( event ) || this.reduceSpecificity( event );
     },
 
@@ -162,14 +174,16 @@ Router.prototype = {
             this.match( event );
     },
 
-    addHandler: function ( fn ) {
+    addHandler: function ( fn, force ) {
         var self = this;
         return function ( route ) {
-            return self.addRoute( route, fn );
+            return self.addRoute( route, fn, force );
         };
     }
 
 };
+
+Router.instance = new Router();
 
 module.exports = Router;
 
