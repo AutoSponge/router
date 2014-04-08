@@ -1,62 +1,66 @@
 {
-    "name": "accu-router",
-    "description": "A router with specificity-based handler searching",
-    "keywords": [
-        "router"
-    ],
-    "homepage": "https://github.com/AutoSponge/router",
-    "version": "0.1.0",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/AutoSponge/router"
-    },
-    "bugs": {
-        "url": "https://github.com/AutoSponge/router/issues",
-        "email": "pgrenier@gmail.com"
-    },
-    "licenses": [
-        {
-            "type": "MIT",
-            "url": "https://github.com/AutoSponge/router/blob/master/LICENSE"
-        }
-    ],
-    "author": "Paul Grenier <pgrenier@gmail.com> (http://autosponge.github.io/)",
-    "files": [
-        "src",
-        "dist",
-        "test",
-        "build.sh",
-        "LICENSE",
-        "README.md"
-    ],
-    "main": "./dist/router.min.js",
-    "engines": {
-        "node": "*"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "browserify": "^3.38.1",
-        "complexity-report": "^1.0.2",
-        "coverify": "^1.0.6",
-        "jshint": "^2.5.0",
-        "jshint-stylish": "^0.1.5",
-        "tape": "^2.12.0",
-        "uglify-js": "^2.4.13"
-    },
-    "testling": {
-        "files": "test/*.js",
-        "browsers": [
-            "ie/9..latest",
-            "chrome/4..latest",
-            "firefox/4..latest",
-            "safari/4..latest",
-            "opera/11.0..latest",
-            "iphone/6..latest",
-            "ipad/6..latest",
-            "android-browser/4.2..latest"
-        ]
-    },
-    "scripts": {
-        "test": "tape test/*.js"
+  "name": "accu-router",
+  "description": "A router with specificity-based handler searching",
+  "keywords": [
+    "router"
+  ],
+  "homepage": "https://github.com/AutoSponge/router",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AutoSponge/router"
+  },
+  "bugs": {
+    "url": "https://github.com/AutoSponge/router/issues",
+    "email": "pgrenier@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/AutoSponge/router/blob/master/LICENSE"
     }
+  ],
+  "author": "Paul Grenier <pgrenier@gmail.com> (http://autosponge.github.io/)",
+  "files": [
+    "src",
+    "dist",
+    "test",
+    "build.sh",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "./dist/router.min.js",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^3.38.1",
+    "complexity-report": "^1.0.2",
+    "coverify": "^1.0.6",
+    "jshint": "^2.5.0",
+    "jshint-stylish": "^0.1.5",
+    "tape": "^2.12.0",
+    "uglify-js": "^2.4.13"
+  },
+  "testling": {
+    "files": "test/*.js",
+    "browsers": [
+      "ie/9..latest",
+      "chrome/4..latest",
+      "firefox/4..latest",
+      "safari/4..latest",
+      "opera/11.0..latest",
+      "iphone/6..latest",
+      "ipad/6..latest",
+      "android-browser/4.2..latest"
+    ]
+  },
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "license": "MIT"
 }
