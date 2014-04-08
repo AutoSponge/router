@@ -85,16 +85,6 @@ var Route = _dereq_( './Route' );
 var RouterResponse = _dereq_( './RouterResponse' );
 var RouterEvent = _dereq_( './RouterEvent' );
 
-function some( arr, fn ) {
-    var i, len;
-    for ( i = 0, len = arr.length; i < len; i += 1 ) {
-        if ( fn( arr[i] ) ) {
-            return true;
-        }
-    }
-    return false;
-}
-
 function reduceExact( event, slice ) {
     return slice[1] &&
         slice[1] !== '_' &&
@@ -163,12 +153,12 @@ Router.prototype = {
     },
 
     reduceSpecificity: function ( event ) {
-        return some( [
+        return [
             reduceExact,
             reduceWildCard,
             reduceParam,
             reduceParamWildCard
-        ], processSpecificity( event, event.current.slice( -2 ) ) ) &&
+        ].some( processSpecificity( event, event.current.slice( -2 ) ) ) &&
             this.match( event );
     },
 
