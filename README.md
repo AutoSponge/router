@@ -1,3 +1,5 @@
+[![NPM version](https://badge.fury.io/js/accu-router.png)](http://badge.fury.io/js/accu-router)
+
 [![Build Status](https://travis-ci.org/AutoSponge/router.png?branch=master)](https://travis-ci.org/AutoSponge/router)
 
 [![browser support](https://ci.testling.com/AutoSponge/router.png)](https://ci.testling.com/AutoSponge/router)
