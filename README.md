@@ -126,7 +126,7 @@ Get the default instance of Router:
 
 ```js
 //node or browserify example
-var router = require( 'router' ).instance;
+var router = require( 'accu-router' ).instance;
 ```
 
 Create a new router
@@ -145,14 +145,14 @@ Create a new router
 
 ```js
 //node or browserify example
-var Router = require( 'router' );
+var Router = require( 'accu-router' );
 var router = new Router();
 
 //or
-var router = require( 'router' ).create();
+var router = require( 'accu-router' ).create();
 
 //or
-var routerFactory = require( 'router' ).create;
+var routerFactory = require( 'accu-router' ).create;
 var router = routerFactory.create();
 
 ```
