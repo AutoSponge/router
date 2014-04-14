@@ -50,6 +50,11 @@ function Router() {
         routes[route.eventPath] = force ? route : routes[route.eventPath] || route;
     };
 
+    this.removeRoute = function ( path ) {
+        var route = new Route( path, null );
+        delete routes[route.eventPath];
+    };
+
     this.handleEvent = function ( event ) {
         var route;
         route = routes[event.updatePath()];

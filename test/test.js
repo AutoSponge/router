@@ -83,3 +83,13 @@ test( 'a/b/c -> *', function ( t ) {
     router.addRoute( '*', splat );
     t.equal( router.match( 'a/b/c' ).fn, splat, 'a/b/c should match default route' );
 } );
+
+test( 'remove route', function ( t ) {
+    t.plan( 2 );
+    var router = new Router();
+    var abi = {};
+    router.addRoute( 'a/b/:id', abi );
+    t.equal( router.match( 'a/b/1' ).fn, abi, 'a/b/1 should match a/b/:id' );
+    router.removeRoute( 'a/b/:id' );
+    t.notOk( router.match( 'a/b/1' ), 'should not match a/b/:id' );
+} );
