@@ -178,6 +178,11 @@ var router = routerFactory.create();
 -   `path` (string) forward slash (`/`) separates path segments (example: `'a/b/c'`)
 -   `arg` any data arguments will be returned in the `response.event.data` array
 
+### Router.removeRoute( path )
+
+-  Removes the route from the router with the same specificity.  For example, if the original route used
+`a/b/:id` it could be removed with `a/b/:anything`.
+
 ## Update
 
 2014-05-08: RouterResponse can be continued by calling `response.next()` which can return a less specific match or `false`
