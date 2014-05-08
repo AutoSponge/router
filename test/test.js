@@ -93,3 +93,17 @@ test( 'remove route', function ( t ) {
     router.removeRoute( 'a/b/:id' );
     t.notOk( router.match( 'a/b/1' ), 'should not match a/b/:id' );
 } );
+
+test( 'router can continue searching routes', function ( t ) {
+    t.plan( 1 );
+    var router = new Router();
+    var abi = {};
+    var ab = {};
+    var a = {};
+    router.addRoute( 'a/b/:id', abi );
+    router.addRoute( 'a/b/*', ab );
+    router.addRoute( 'a/*', a );
+    var match1 = router.match( 'a/b/1' );
+    var match2 = match1.next();
+    t.equal( match2.fn, ab, 'should match next specific route' );
+} );

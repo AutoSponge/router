@@ -56,9 +56,10 @@ function Router() {
     };
 
     this.handleEvent = function ( event ) {
+        var router = this;
         var route;
         route = routes[event.updatePath()];
-        return route && new RouterResponse( event, route );
+        return route && new RouterResponse( event, route, this.reduceSpecificity.bind( this, event ) );
     };
 }
 

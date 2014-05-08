@@ -81,6 +81,11 @@ This json schema describes the RouterResponse object:
             "type": "object",
             "required": false
         },
+        "next": {
+            "description": "function which returns the next route in specificity order, may return false",
+            "type": "function",
+            "required": true
+        },
         "params": {
             "description": "named tokens found in a path using /:<name> segments",
             "type": "object",
@@ -172,3 +177,7 @@ var router = routerFactory.create();
 
 -   `path` (string) forward slash (`/`) separates path segments (example: `'a/b/c'`)
 -   `arg` any data arguments will be returned in the `response.event.data` array
+
+## Update
+
+2014-05-08: RouterResponse can be continued by calling `response.next()` which can return a less specific match or `false`
