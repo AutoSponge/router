@@ -107,7 +107,7 @@ This json schema describes the RouterResponse object:
 
 ## Getting Started
 
-`npm install --save-dev accu-router`
+`npm install --save accu-router`
 
 If you want to build the project:
 
