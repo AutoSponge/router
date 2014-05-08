@@ -65,12 +65,13 @@ module.exports = RouterEvent;
 },{}],4:[function(_dereq_,module,exports){
 'use strict';
 
-function RouterResponse( event, route ) {
+function RouterResponse( event, route, next ) {
     this.event = event;
     this.params = this.getParams( route );
     this.splat = this.getSplat();
     this.route = route.path;
     this.fn = route.fn;
+    this.next = next;
 }
 
 RouterResponse.prototype = {
@@ -152,9 +153,10 @@ function Router() {
     };
 
     this.handleEvent = function ( event ) {
+        var router = this;
         var route;
         route = routes[event.updatePath()];
-        return route && new RouterResponse( event, route );
+        return route && new RouterResponse( event, route, this.reduceSpecificity.bind( this, event ) );
     };
 }
 
